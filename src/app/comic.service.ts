@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Comic } from './models/comic';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Md5 } from 'ts-md5/dist/md5';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { CustomResponse } from './models/custom-response';
+import { Comic } from './models/comic';
+
 
 
 @Injectable({
@@ -21,11 +25,15 @@ export class ComicService {
     private hash: any;
 
 
-    getComics(parameters: object = {}) {
+    getComics(parameters: object = {}): Observable<Comic[]> {
         return this.makeRequest(parameters);
     }
 
-    makeRequest(parameters: object = {}) {
+    getFirstsComics(limit: number = 10): Observable<Comic[]> {
+        return this.getComics({ limit: limit });
+    }
+
+    makeRequest(parameters: object = {}): Observable<any[]> {
         this.generateTimeStamp();
         this.generateHash(this.publicKey, this.privateKey);
 
@@ -37,15 +45,11 @@ export class ComicService {
 
         const url = this.baseUrl + this.comicRessource;
 
-        return this.http.get<Comic[]>(url, {
+        return this.http.get<CustomResponse>(url, {
             params: {
                 ...baseParameters, ...parameters
             }
-        });
-    }
-
-    getNFirstComics(limit: number) {
-        return this.getComics({ limit: 10 });
+        }).pipe(map(response => response.data.results));
     }
 
     generateHash(publicKey: string, privateKey: string): void {
