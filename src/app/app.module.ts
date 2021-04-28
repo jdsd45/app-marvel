@@ -12,11 +12,13 @@ import { LayoutModule } from '@angular/cdk/layout';
 
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import { ComicComponent } from './comic/comic.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        ComicComponent
     ],
     imports: [
         BrowserModule,
