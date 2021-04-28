@@ -30,7 +30,11 @@ export class ComicService {
     }
 
     getFirstsComics(limit: number = 10): Observable<Comic[]> {
-        return this.getComics({ limit: limit });
+        return this.getComics({
+            limit: limit,
+            format: 'comic',
+        }
+        );
     }
 
     makeRequest(parameters: object = {}): Observable<any[]> {
