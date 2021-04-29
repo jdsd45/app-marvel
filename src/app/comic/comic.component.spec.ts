@@ -8,9 +8,9 @@ describe('ComicComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ComicComponent ]
+      declarations: [ComicComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

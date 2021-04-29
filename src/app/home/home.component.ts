@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ComicService } from '../comic.service';
 import { Comic } from '../models/comic';
-import { ThumbnailFormats } from '../models/thumbnail-formats.enum';
 
 @Component({
     selector: 'app-home',

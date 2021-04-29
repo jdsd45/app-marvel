@@ -24,11 +24,20 @@ export class ComicService {
     private timeStamp: string = '';
     private hash: any;
 
-
+    /**
+     * Renvoie les comics 
+     * @param parameters 
+     * @returns 
+     */
     getComics(parameters: object = {}): Observable<Comic[]> {
         return this.makeRequest(parameters);
     }
 
+    /**
+     * Renvoie les premiers comics de la liste
+     * @param limit 
+     * @returns 
+     */
     getFirstsComics(limit: number = 10): Observable<Comic[]> {
         return this.getComics({
             limit: limit,
@@ -37,6 +46,11 @@ export class ComicService {
         );
     }
 
+    /**
+     * Construit la requête http
+     * @param parameters 
+     * @returns 
+     */
     makeRequest(parameters: object = {}): Observable<any[]> {
         this.generateTimeStamp();
         this.generateHash(this.publicKey, this.privateKey);
@@ -56,11 +70,19 @@ export class ComicService {
         }).pipe(map(response => response.data.results));
     }
 
+    /**
+     * Génère le hash pour accéder à l'API
+     * @param publicKey 
+     * @param privateKey // TODO - ne doit pas être côté front
+     */
     generateHash(publicKey: string, privateKey: string): void {
         const strToHash: string = this.timeStamp + privateKey + publicKey;
         this.hash = Md5.hashStr(strToHash);
     }
 
+    /**
+     * Génère un Timestamp
+     */
     generateTimeStamp(): void {
         this.timeStamp = Date.now().toString();
     }

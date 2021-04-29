@@ -1,7 +1,5 @@
-<p>home works!</p>
-
 <div id='comics-home-container'>
-    <mat-grid-list cols="3" rowHeight="500px" gutterSize="15px">
+    <mat-grid-list cols="4" rowHeight="500px" gutterSize="15px">
         <mat-grid-tile *ngFor="let comic of comics | async" [colspan]="1" [rowspan]="1">
             <app-comic [comic]="comic">
             </app-comic>
