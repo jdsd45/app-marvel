@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Comic } from '../models/comic';
 import { ThumbnailFormats } from '../models/thumbnail-formats.enum';
 
 @Component({
@@ -7,18 +8,13 @@ import { ThumbnailFormats } from '../models/thumbnail-formats.enum';
     styleUrls: ['./comic.component.scss']
 })
 export class ComicComponent {
-    @Input() comic: any;
+    @Input() comic: Comic;
+
+    thumbnailUrl: string;
 
     ngOnInit(): void {
-        console.log(this.comic)
-    }
-
-    /**
-     * Génère l'url vers la miniature'
-     */
-    get getThumbnailPath(): string {
         const format = ThumbnailFormats.landscape_xlarge;
-        return `${this.comic.thumbnail.path}/${format}.${this.comic.thumbnail.extension}`;
+        this.thumbnailUrl = `${this.comic.thumbnail.path}/${format}.${this.comic.thumbnail.extension}`;
     }
 
 }

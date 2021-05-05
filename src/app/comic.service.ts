@@ -51,7 +51,7 @@ export class ComicService {
      * @param parameters 
      * @returns 
      */
-    makeRequest(parameters: object = {}): Observable<any[]> {
+    makeRequest(parameters: object = {}): Observable<Comic[]> {
         this.generateTimeStamp();
         this.generateHash(this.publicKey, this.privateKey);
 

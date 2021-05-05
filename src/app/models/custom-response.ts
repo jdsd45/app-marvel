@@ -1,3 +1,7 @@
+import { Comic } from "./comic";
+
 export interface CustomResponse {
-    data: any;
+    data: {
+        results: Comic[]
+    };
 }
