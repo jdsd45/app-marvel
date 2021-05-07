@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ComicService } from '../comic.service';
-import { Comic } from '../models/comic';
+import { ComicService } from '../../services/comic.service';
+import { Comic } from '../../models/comic';
 
 @Component({
     selector: 'app-home',

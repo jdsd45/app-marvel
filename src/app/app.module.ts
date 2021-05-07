@@ -11,14 +11,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
 
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './home/home.component';
-import { ComicComponent } from './comic/comic.component';
+import { HomeComponent } from './components/home/home.component';
+import { ComicComponent } from './components/comic/comic.component';
+import { httpInterceptorProviders } from './interceptors';
+import { AppRoutingModule } from './app-routing.module';
+import { ComicDetailComponent } from './components/comic-detail/comic-detail.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        ComicComponent
+        ComicComponent,
+        ComicDetailComponent
     ],
     imports: [
         BrowserModule,
@@ -30,8 +34,9 @@ import { ComicComponent } from './comic/comic.component';
         MatButtonModule,
         LayoutModule,
         HttpClientModule,
+        AppRoutingModule,
     ],
-    providers: [],
+    providers: [httpInterceptorProviders],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

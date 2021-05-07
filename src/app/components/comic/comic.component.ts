@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Comic } from '../models/comic';
-import { ThumbnailFormats } from '../models/thumbnail-formats.enum';
+import { Comic } from '../../models/comic';
+import { ThumbnailFormats } from '../../models/thumbnail-formats.enum';
 
 @Component({
     selector: 'app-comic',
