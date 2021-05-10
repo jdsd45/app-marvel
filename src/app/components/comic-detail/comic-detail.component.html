@@ -1,5 +1,10 @@
-<p>comic-detail works!</p>
-<div *ngIf="comic">
-    <h2> {{comic.title}} </h2>
-
+<div class="base-container">
+	<div *ngIf="comic">
+		<h2>
+			{{comic.title}}
+		</h2>
+	</div>
+	<a routerlink="/">
+		Back
+	</a>
 </div>
