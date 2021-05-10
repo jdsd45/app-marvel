@@ -23,10 +23,10 @@ export class ComicDetailComponent implements OnInit {
     }
 
     getComic(): void {
-        const id = Number(this.route.snapshot.paramMap.get('id'));
-        this.comicService.findOne(id)
-            .subscribe(comic => this.comic = comic);
-
+        this.route.paramMap.subscribe(mapParams => {
+            this.comicService.findOne(Number(mapParams.get('id')))
+            .subscribe(comic => this.comic = comic)
+        })
     }
 
 }
