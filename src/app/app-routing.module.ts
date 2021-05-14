@@ -5,7 +5,8 @@ import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'comics/:id', component: ComicDetailComponent }
+  { path: 'comics/:id', component: ComicDetailComponent },
+  { path: 'back-office', loadChildren: () => import('./back-office/back-office.module').then(m => m.BackOfficeModule) }
 ];
 
 @NgModule({

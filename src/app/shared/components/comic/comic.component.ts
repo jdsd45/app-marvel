@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Comic } from '../../models/comic';
+import { Comic, ComicDto } from '../../models/comic';
 import { ThumbnailFormats } from '../../models/thumbnail-formats.enum';
 
 @Component({
@@ -15,6 +15,8 @@ export class ComicComponent {
     ngOnInit(): void {
         const format = ThumbnailFormats.landscape_xlarge;
         this.thumbnailUrl = `${this.comic.thumbnail.path}/${format}.${this.comic.thumbnail.extension}`;
+
+        let test = new ComicDto(this.comic)
     }
 
 }

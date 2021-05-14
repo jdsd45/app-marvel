@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Comic } from 'src/app/models/comic';
-import { ComicService } from 'src/app/services/comic.service';
+import { Comic } from '@shared/models/comic';
+import { ComicService } from '@shared/services/comic.service';
 
 @Component({
     selector: 'app-comic-detail',
@@ -25,7 +24,7 @@ export class ComicDetailComponent implements OnInit {
     getComic(): void {
         this.route.paramMap.subscribe(mapParams => {
             this.comicService.findOne(Number(mapParams.get('id')))
-            .subscribe(comic => this.comic = comic)
+                .subscribe(comic => this.comic = comic)
         })
     }
 

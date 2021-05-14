@@ -7,7 +7,9 @@ export const environment = {
     apiUrl: 'https://gateway.marvel.com',
     apiRessources: {
         comics: '/v1/public/comics'
-    }
+    },
+    apiPrivateKey: '55b06e4d4d03a3a8984f853abf90e18b967a8e03',
+    apiPublicKey: 'a5a0013bca6f119629675f89e7518ecf'
 };
 
 /*
