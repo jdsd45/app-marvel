@@ -1,0 +1,21 @@
+<p>comic-create-form works!</p>
+
+<form [formGroup]="comicForm">
+    <label>
+        Title:
+        <input type="text" formControlName="title">
+    </label>
+    <label>
+        Description:
+        <textarea type="text" formControlName="description"></textarea>
+    </label>
+    <label>
+        Date:
+        <input type="date" formControlName="date">>
+    </label>
+    <button type="submit" [disabled]="!comicForm.valid">Valider</button>
+</form>
+
+<div>
+    {{ comicForm.value | json }}
+</div>

@@ -16,7 +16,7 @@ export class ComicComponent {
         const format = ThumbnailFormats.landscape_xlarge;
         this.thumbnailUrl = `${this.comic.thumbnail.path}/${format}.${this.comic.thumbnail.extension}`;
 
-        let test = new ComicDto(this.comic)
+        //let test = new ComicDto(this.comic)
     }
 
 }
