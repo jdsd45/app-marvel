@@ -1,10 +1,17 @@
 <p>comic-create-form works!</p>
 
-<form [formGroup]="comicForm">
-    <label>
+<form [formGroup]="comicForm" id="comicForm">
+    <mat-form-field appearance="legacy">
+        <mat-label>Enter title</mat-label>
+        <input matInput placeholder="title" formControlName="title" required>
+        <!--         <mat-error *ngIf="title.invalid">Erreur</mat-error> -->
+        <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+    <!--     <label>
         Title:
         <input type="text" formControlName="title">
     </label>
+
     <label>
         Description:
         <textarea type="text" formControlName="description"></textarea>
@@ -12,7 +19,7 @@
     <label>
         Date:
         <input type="date" formControlName="date">>
-    </label>
+    </label> -->
     <button type="submit" [disabled]="!comicForm.valid">Valider</button>
 </form>
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-comic-create-form',
@@ -7,23 +7,26 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn,
     styleUrls: ['./comic-create-form.component.scss']
 })
 export class ComicCreateFormComponent {
-    comicForm = new FormGroup({
-        title: new FormControl('', [
+
+    comicForm = this.fb.group({
+        title: ['', [
             Validators.required
-        ]),
-        description: new FormControl('', [
+        ]],
+        description: ['', [
             Validators.required,
             Validators.minLength(1),
             Validators.maxLength(400)
-        ]),
-        date: new FormControl('', [
+        ]],
+        date: ['', [
             Validators.required,
             this.dateValidator()
+        ]],
+        character: ['']
+    })
+
+    constructor(private fb: FormBuilder) { }
 
 
-        ]),
-        character: new FormControl([])
-    });
 
     dateValidator(): ValidatorFn {
         return (control: AbstractControl): ValidationErrors | null => {
