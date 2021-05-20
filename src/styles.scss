@@ -10,8 +10,7 @@ html, body { height: 100%; }
 body { 
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif; 
-    background-color: mat-color($mat-dark-theme-background, background);
-    color: white;
+    //background-color: mat-color($mat-dark-theme-background, background);
 /*     background-color: mat-color(mat-palette($mat-grey)); */
 /*     background-color: $mat-dark-theme-background('background'); */
 }

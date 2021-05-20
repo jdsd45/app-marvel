@@ -5,6 +5,8 @@ import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ComicDetailComponent } from './components/comic-detail/comic-detail.component';
 import { SharedModule } from '@shared/shared.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 
 @NgModule({
     declarations: [
@@ -15,7 +17,8 @@ import { SharedModule } from '@shared/shared.module';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        SharedModule
+        SharedModule,
+        MatSidenavModule
     ],
     bootstrap: [AppComponent]
 })
