@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ComicDetailComponent } from './components/comic-detail/comic-detail.component';
 import { SharedModule } from '@shared/shared.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+
 
 
 @NgModule({
@@ -18,7 +20,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
         BrowserModule,
         AppRoutingModule,
         SharedModule,
-        MatSidenavModule
+        MatSidenavModule,
+        MatListModule
     ],
     bootstrap: [AppComponent]
 })

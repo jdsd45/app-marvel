@@ -1,12 +1,15 @@
 <mat-sidenav-container>
     <mat-sidenav mode="side" opened fixedInViewport>
-        <a mat-raised-button color="primary" routerLink="/back-office">
-            Back-office
-        </a>
+        <mat-nav-list>
+            <a mat-list-item routerLink="/back-office">
+                Back-office
+            </a>
+            <a mat-list-item routerLink="/">
+                Home
+            </a>
+        </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-
         <router-outlet></router-outlet>
-
     </mat-sidenav-content>
 </mat-sidenav-container>
