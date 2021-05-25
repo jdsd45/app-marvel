@@ -1,4 +1,14 @@
-#comicForm {
-    margin: auto;
-    width: 50vw;
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 3fr
 }
+
+#comicForm {
+    display: flex;
+    flex-direction: column;
+}
+
+/* button {
+    width: 50%;
+    margin: auto;
+} */

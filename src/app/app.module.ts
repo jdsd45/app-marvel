@@ -8,6 +8,7 @@ import { SharedModule } from '@shared/shared.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { MatListModule } from '@angular/material/list';
         AppRoutingModule,
         SharedModule,
         MatSidenavModule,
-        MatListModule
+        MatListModule,
+        MatGridListModule
     ],
     bootstrap: [AppComponent]
 })

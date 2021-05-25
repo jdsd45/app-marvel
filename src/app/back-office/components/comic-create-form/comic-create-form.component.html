@@ -1,26 +1,65 @@
-<form [formGroup]="comicForm" id="comicForm">
-    <mat-form-field appearance="legacy">
-        <mat-label>Enter title</mat-label>
-        <input matInput placeholder="title" formControlName="title" required>
-        <!--         <mat-error *ngIf="title.invalid">Erreur</mat-error> -->
-        <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-    <!--     <label>
-        Title:
-        <input type="text" formControlName="title">
-    </label>
+<h1>Create a comic</h1>
+<div class="container">
+    <div class="item"></div>
+    <form [formGroup]="comicForm" id="comicForm" class="item">
+        <mat-form-field appearance="legacy">
+            <mat-label>Enter title</mat-label>
+            <input matInput placeholder="title" formControlName="title" required>
+            <!--         <mat-error *ngIf="title.invalid">Erreur</mat-error> -->
+            <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="legacy">
+            <mat-label>Enter title</mat-label>
+            <textarea matInput placeholder="description" formControlName="description" required></textarea>
+            <mat-hint>Hint</mat-hint>
+        </mat-form-field>
 
-    <label>
-        Description:
-        <textarea type="text" formControlName="description"></textarea>
-    </label>
-    <label>
-        Date:
-        <input type="date" formControlName="date">>
-    </label> -->
-    <button type="submit" [disabled]="!comicForm.valid">Valider</button>
-</form>
+        <mat-form-field appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput formControlName="date" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
 
-<div>
-    {{ comicForm.value | json }}
+        <!--         <mat-form-field appearance="legacy">
+            <mat-label>Enter character</mat-label>
+            <input matInput placeholder="characters" formControlName="characters" required [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let character of filteredCharacters | async" [value]="character.name">
+                    {{character.name}}
+                </mat-option>
+            </mat-autocomplete>
+            <mat-hint>Hint</mat-hint>
+        </mat-form-field> -->
+
+        <mat-form-field>
+            <mat-label>Characters</mat-label>
+            <mat-chip-list #chipList aria-label="Fruit selection">
+                <mat-chip *ngFor="let character of characters" [selectable]="true" [removable]="true"
+                    (removed)="removeCharacter(character)">
+                    {{character.name}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="New character..." #fruitInput formControlName="characters" [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="addCharacter($event)">
+            </mat-chip-list>
+
+            <!--     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)"> -->
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let character of filteredCharacters | async" [value]="character.name">
+                    {{character.name}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+
+        <br>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="!comicForm.valid">Valider</button>
+    </form>
+
+    <div class="item">
+        {{ comicForm.value | json }}
+    </div>
 </div>
