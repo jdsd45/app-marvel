@@ -12,6 +12,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 
@@ -31,6 +33,7 @@ import { MatChipsModule } from '@angular/material/chips';
         MatNativeDateModule,
         MatAutocompleteModule,
         MatChipsModule,
+        MatIconModule
 
     ],
     providers: [
