@@ -35,7 +35,7 @@
         <mat-form-field>
             <mat-label>Characters</mat-label>
             <mat-chip-list #chipList
-                aria-label="Fruit selection"
+                aria-label="Characters"
                 formControlName="characters">
 
                 <mat-chip *ngFor="let character of comicForm.get('characters').value"
@@ -45,7 +45,7 @@
                     selected>
                     {{character}}
                     <mat-icon matChipRemove
-                        *ngIf="removable"></mat-icon>
+                        *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
                 <input placeholder="New character..."
                     #characterInput

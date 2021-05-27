@@ -5,10 +5,8 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { Character } from '@shared/models/character';
 import { CharacterService } from '@shared/services/character.service';
 import { Observable } from 'rxjs';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-
-
-
+import { COMMA, ENTER, T, X } from '@angular/cdk/keycodes';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-comic-create-form',
@@ -33,10 +31,17 @@ export class ComicCreateFormComponent {
             Validators.required,
             this.dateValidator()
         ]],
-        characters: [[]],
+        characters: [[], [
+            Validators.required,
+            Validators.minLength(1)
+        ]],
         characterActual: ['']
-
     })
+
+    get characters() {
+        return this.comicForm.get('characters');
+    }
+
 
     @ViewChild('characterInput') characterInput: ElementRef<HTMLInputElement>;
 
@@ -57,19 +62,20 @@ export class ComicCreateFormComponent {
 
     ngOnInit(): void {
         this.listenForCharacter();
+
     }
 
-
-
     removeCharacter(event: MatChipInputEvent): void {
+
+        console.log('remove')
         const value = (event.value || '').trim();
 
         if (value) {
-            let characters = this.comicForm.get('characters').value;
+            let characters = this.characters.value;
             const index = characters.indexOf(value)
             if (index) {
                 characters.splice(index, 1)
-                this.comicForm.get('characters').setValue(characters)
+                this.characters.setValue(characters)
             }
         }
     }
@@ -78,20 +84,21 @@ export class ComicCreateFormComponent {
         const value = event.option.viewValue;
 
         if (value) {
-            let characters = this.comicForm.get('characters').value;
+            let characters = this.characters.value;
             characters.push(value);
-            this.comicForm.get('characters').setValue(characters)
+            this.characters.setValue(characters)
             this.characterInput.nativeElement.value = '';
             this.comicForm.get('characterActual').setValue('')
         }
     }
 
-
-
     listenForCharacter(): void {
         this.comicForm.get('characterActual').valueChanges.subscribe(value => {
             if (value.length >= 3) {
-                this.filteredCharacters = this.characterService.getCharacters({ nameStartsWith: value });
+                this.filteredCharacters = this.characterService.getCharacters({ nameStartsWith: value })
+                    .pipe(map(characters => {
+                        return characters.filter(c => !this.characters.value.includes(c.name))
+                    }));
             }
         })
     }
