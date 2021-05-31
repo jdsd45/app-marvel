@@ -1,17 +1,18 @@
 <h1>Create a comic</h1>
 <div class="container">
+
     <div class="item"></div>
+
     <form [formGroup]="comicForm"
         id="comicForm"
-        class="item">
+        class="item"
+        (ngSubmit)="onSubmit()">
         <mat-form-field appearance="legacy">
             <mat-label>Enter title</mat-label>
             <input matInput
                 placeholder="title"
                 formControlName="title"
                 required>
-            <!--         <mat-error *ngIf="title.invalid">Erreur</mat-error> -->
-            <mat-hint>Hint</mat-hint>
         </mat-form-field>
         <mat-form-field appearance="legacy">
             <mat-label>Enter title</mat-label>
@@ -19,7 +20,6 @@
                 placeholder="description"
                 formControlName="description"
                 required></textarea>
-            <mat-hint>Hint</mat-hint>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
@@ -36,9 +36,9 @@
             <mat-label>Characters</mat-label>
             <mat-chip-list #chipList
                 aria-label="Characters"
-                formControlName="characters">
+                formControlName="charactersList">
 
-                <mat-chip *ngFor="let character of comicForm.get('characters').value"
+                <mat-chip *ngFor="let character of comicForm.get('charactersList').value"
                     [selectable]="true"
                     [removable]="true"
                     (removed)="removeCharacter(character)"
@@ -57,7 +57,7 @@
 
             <mat-autocomplete #auto="matAutocomplete"
                 (optionSelected)="addCharacter($event)">
-                <mat-option *ngFor="let character of filteredCharacters | async"
+                <mat-option *ngFor="let character of filteredCharactersList | async"
                     [value]="character.name">
                     {{character.name}}
                 </mat-option>
@@ -72,8 +72,8 @@
             type="submit"
             [disabled]="!comicForm.valid">Valider</button>
     </form>
-
+    <!-- 
     <div class="item">
         {{ comicForm.value | json }}
-    </div>
+    </div> -->
 </div>

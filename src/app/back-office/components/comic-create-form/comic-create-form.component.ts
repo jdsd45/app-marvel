@@ -1,12 +1,13 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Character } from '@shared/models/character';
 import { CharacterService } from '@shared/services/character.service';
 import { Observable } from 'rxjs';
-import { COMMA, ENTER, T, X } from '@angular/cdk/keycodes';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { map } from 'rxjs/operators';
+import { ComicService } from '@shared/services/comic.service';
 
 @Component({
     selector: 'app-comic-create-form',
@@ -17,6 +18,8 @@ export class ComicCreateFormComponent {
 
     separatorKeysCodes: number[] = [ENTER, COMMA];
     removable: boolean = true
+    filteredCharactersList: Observable<Character[]>;
+    @ViewChild('characterInput') characterInput: ElementRef<HTMLInputElement>;
 
     comicForm = this.fb.group({
         title: ['', [
@@ -31,26 +34,29 @@ export class ComicCreateFormComponent {
             Validators.required,
             this.dateValidator()
         ]],
-        characters: [[], [
+        charactersList: [[], [
             Validators.required,
             Validators.minLength(1)
         ]],
         characterActual: ['']
     })
 
-    get characters() {
-        return this.comicForm.get('characters');
+    comicFormInitialValue: any;
+
+    get charactersList() {
+        return this.comicForm.get('charactersList');
     }
-
-
-    @ViewChild('characterInput') characterInput: ElementRef<HTMLInputElement>;
-
-    filteredCharacters: Observable<Character[]>;
 
     constructor(
         private fb: FormBuilder,
-        private characterService: CharacterService
+        private characterService: CharacterService,
+        private comicService: ComicService
     ) { }
+
+    ngOnInit(): void {
+        this.comicFormInitialValue = this.comicForm.value
+        this.filterCharactersListWithUserInput();
+    }
 
     dateValidator(): ValidatorFn {
         return (control: AbstractControl): ValidationErrors | null => {
@@ -60,46 +66,43 @@ export class ComicCreateFormComponent {
         }
     }
 
-    ngOnInit(): void {
-        this.listenForCharacter();
-
-    }
-
     removeCharacter(event: MatChipInputEvent): void {
-
-        console.log('remove')
-        const value = (event.value || '').trim();
-
-        if (value) {
-            let characters = this.characters.value;
-            const index = characters.indexOf(value)
-            if (index) {
-                characters.splice(index, 1)
-                this.characters.setValue(characters)
-            }
-        }
+        const value = event;
+        const charactersList = this.charactersList.value.filter(c => c !== value);
+        this.charactersList.setValue(charactersList)
     }
 
     addCharacter(event: MatAutocompleteSelectedEvent): void {
         const value = event.option.viewValue;
 
         if (value) {
-            let characters = this.characters.value;
-            characters.push(value);
-            this.characters.setValue(characters)
+            let charactersList = this.charactersList.value;
+            charactersList.push(value);
+            this.charactersList.setValue(charactersList)
             this.characterInput.nativeElement.value = '';
             this.comicForm.get('characterActual').setValue('')
         }
     }
 
-    listenForCharacter(): void {
-        this.comicForm.get('characterActual').valueChanges.subscribe(value => {
-            if (value.length >= 3) {
-                this.filteredCharacters = this.characterService.getCharacters({ nameStartsWith: value })
-                    .pipe(map(characters => {
-                        return characters.filter(c => !this.characters.value.includes(c.name))
-                    }));
+    filterCharactersListWithUserInput(): void {
+        this.comicForm.get('characterActual').valueChanges.subscribe(inputValue => {
+            console.log('inputValue', inputValue)
+            if (inputValue && inputValue.length >= 3) {
+                this.filteredCharactersList = this.characterService.getCharacters({ nameStartsWith: inputValue })
+                    .pipe(
+                        map(characters => {
+                            return characters.filter(c => !this.charactersList.value.includes(c.name))
+                        })
+                    );
             }
         })
     }
+
+    onSubmit() {
+        console.log(this.comicFormInitialValue)
+        this.comicService.addCustomComic(this.comicForm.value)
+        this.comicForm.reset(this.comicFormInitialValue)
+    }
+
+
 }

@@ -46,4 +46,8 @@ export class ComicService extends CrudService<Comic> {
         });
     }
 
+    addCustomComic(customComic) {
+        localStorage.setItem(customComic.title, JSON.stringify(customComic));
+    }
+
 }

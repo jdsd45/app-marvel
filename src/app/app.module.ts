@@ -9,6 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 
 import { MatGridListModule } from '@angular/material/grid-list';
+import { CustomComicsComponent } from './components/custom-comics/custom-comics.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
         AppComponent,
         HomeComponent,
         ComicDetailComponent,
+        CustomComicsComponent,
     ],
     imports: [
         BrowserModule,
