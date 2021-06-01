@@ -4,7 +4,9 @@
 			{{ comic.title }}
 		</mat-card-title>
 	</mat-card-header>
-	<img mat-card-image src="{{ thumbnailUrl }}" alt="">
+	<img mat-card-image
+		src="{{ thumbnailUrl }}"
+		alt="">
 	<mat-card-content>
 		<p>
 			{{ comic.description | slice:0:150 }}
@@ -12,7 +14,8 @@
 		</p>
 	</mat-card-content>
 	<mat-card-actions>
-		<a mat-button routerLink="/comics/{{comic.id}}">
+		<a mat-button
+			routerLink="/comics/{{comic.id}}">
 			See more
 		</a>
 	</mat-card-actions>

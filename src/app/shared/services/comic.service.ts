@@ -47,7 +47,33 @@ export class ComicService extends CrudService<Comic> {
     }
 
     addCustomComic(customComic) {
-        localStorage.setItem(customComic.title, JSON.stringify(customComic));
+        const KEY = 'customComicsList';
+
+        const parseCustomComic = JSON.stringify(customComic);
+
+        let customComicsList;
+
+        if (localStorage.getItem(KEY) === null) {
+            customComicsList = [];
+        } else {
+            customComicsList = JSON.parse(localStorage.getItem(KEY));
+        }
+
+        customComicsList.push(parseCustomComic);
+        localStorage.setItem(KEY, JSON.stringify(customComicsList));
+
+    }
+
+    getCustomComics() {
+        const KEY = 'customComicsList';
+
+        if (localStorage.getItem(KEY)) {
+            let customComicsList = JSON.parse(localStorage.getItem(KEY));
+            return customComicsList.map(c => JSON.parse(c))
+            //return JSON.parse(localStorage.getItem(KEY));
+        }
+
+        return [];
     }
 
 }

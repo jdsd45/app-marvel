@@ -11,6 +11,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { httpInterceptorProviders } from './interceptors';
 import { ComicComponent } from './components/comic/comic.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { MatChipsModule } from '@angular/material/chips';
+
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { AppRoutingModule } from '../app-routing.module';
     HttpClientModule,
     MatGridListModule,
     MatCardModule,
+    MatChipsModule,
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
@@ -32,6 +35,7 @@ import { AppRoutingModule } from '../app-routing.module';
     HttpClientModule,
     MatGridListModule,
     MatCardModule,
+    MatChipsModule,
     MatMenuModule,
     MatIconModule,
     MatButtonModule,

@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Character } from '@shared/models/character';
@@ -86,8 +86,7 @@ export class ComicCreateFormComponent {
 
     filterCharactersListWithUserInput(): void {
         this.comicForm.get('characterActual').valueChanges.subscribe(inputValue => {
-            console.log('inputValue', inputValue)
-            if (inputValue && inputValue.length >= 3) {
+            if (inputValue && inputValue.length >= 1) {
                 this.filteredCharactersList = this.characterService.getCharacters({ nameStartsWith: inputValue })
                     .pipe(
                         map(characters => {
@@ -99,9 +98,9 @@ export class ComicCreateFormComponent {
     }
 
     onSubmit() {
-        console.log(this.comicFormInitialValue)
         this.comicService.addCustomComic(this.comicForm.value)
         this.comicForm.reset(this.comicFormInitialValue)
+        this.comicForm.get('charactersList').setValue([])
     }
 
 
