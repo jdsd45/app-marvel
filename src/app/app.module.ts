@@ -10,6 +10,9 @@ import { MatListModule } from '@angular/material/list';
 
 import { MatGridListModule } from '@angular/material/grid-list';
 import { CustomComicsComponent } from './components/custom-comics/custom-comics.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -25,7 +28,10 @@ import { CustomComicsComponent } from './components/custom-comics/custom-comics.
         SharedModule,
         MatSidenavModule,
         MatListModule,
-        MatGridListModule
+        MatGridListModule,
+        MatCardModule,
+        MatChipsModule,
+        BrowserAnimationsModule
     ],
     bootstrap: [AppComponent]
 })

@@ -34,10 +34,6 @@ import { MatIconModule } from '@angular/material/icon';
         MatAutocompleteModule,
         MatChipsModule,
         MatIconModule
-
-    ],
-    providers: [
-        MatDatepickerModule,
     ],
 })
 export class BackOfficeModule { }

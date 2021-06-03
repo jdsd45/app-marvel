@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Comic, ComicDto } from '../../models/comic';
 import { ThumbnailFormats } from '../../models/thumbnail-formats.enum';
 
@@ -9,6 +9,7 @@ import { ThumbnailFormats } from '../../models/thumbnail-formats.enum';
 })
 export class ComicComponent {
     @Input() comic: Comic;
+    @Output() onSeeMore: EventEmitter<string> = new EventEmitter();
 
     thumbnailUrl: string;
 
@@ -17,6 +18,10 @@ export class ComicComponent {
         this.thumbnailUrl = `${this.comic.thumbnail.path}/${format}.${this.comic.thumbnail.extension}`;
 
         //let test = new ComicDto(this.comic)
+    }
+
+    seeMore(comicId) {
+        this.onSeeMore.emit(comicId);
     }
 
 }

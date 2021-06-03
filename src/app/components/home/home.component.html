@@ -1,7 +1,7 @@
 <div id='comics-home-container'>
     <mat-grid-list cols="4" rowHeight="500px" gutterSize="15px">
         <mat-grid-tile *ngFor="let comic of comics | async" [colspan]="1" [rowspan]="1">
-            <app-comic [comic]="comic">
+            <app-comic [comic]="comic" (onSeeMore)="seeMore($event)">
             </app-comic>
         </mat-grid-tile>
     </mat-grid-list>

@@ -14,9 +14,9 @@
 		</p>
 	</mat-card-content>
 	<mat-card-actions>
-		<a mat-button
-			routerLink="/comics/{{comic.id}}">
+		<button mat-button
+			(click)="seeMore(comic.id)">
 			See more
-		</a>
+		</button>
 	</mat-card-actions>
 </mat-card>
